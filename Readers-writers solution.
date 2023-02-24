@@ -1,3 +1,9 @@
+let take two Bonary semaphore: 
+mutex-binary semaphore, initialized to 1.
+write-binary semaphore, initialized to 1.
+and an variable readcount, initialized to 0.
+
+
 WRITERS CODE
 
 void  writers{
