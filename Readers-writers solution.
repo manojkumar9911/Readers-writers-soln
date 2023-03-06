@@ -6,24 +6,15 @@ and an variable readcount, initialized to 0.
 
 WRITERS CODE
 
-void  writers{
-while(true){
-wait(write);
-
-CS
-
-signal(write);
-}
-}
-
-
-READERS CODE
-
-void readers{
+readers{
 while(true){
 wait(mutex);
+it will decrease the value of mutex semaphore
 readcount++;
-if(readcount==1)
+readcount value will be increased by 1.
+if(readcount==1){
+for starvation free if one reader is inside,
+then it block writers to enter into the critical section
 wait(write);
 }
 signal(mutex);
@@ -31,8 +22,13 @@ signal(mutex);
 CS
 
 wait(mutex);
+mutex value will be decrease by 1.
 readcount--;
+if one reader finish his work then readcount value will be decrease by 1.
 if(readcount==0)
+if there is no reader then we have to increment the value of 
+both semaphores, so that any one can come inside.
+mutex also declare that my work is done.
 signal(write);
 signal(mutex);
 }
